@@ -23,6 +23,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   Restaurant.find()
@@ -33,6 +34,12 @@ app.get('/', (req, res) => {
 
 app.get('/restaurant/new', (req, res) => {
   res.render('new')
+})
+
+app.post('/restaurant/create', (req, res) => {
+  Restaurant.create(req.body)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurant/:id', (req, res) => {
