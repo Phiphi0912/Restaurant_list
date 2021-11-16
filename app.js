@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurant/new', (req, res) => {
+  res.render('new')
+})
 
 app.get('/restaurant/:id', (req, res) => {
   const restaurant = restaurantList.find((item) => item.id === Number(req.params.id))
