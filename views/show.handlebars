@@ -1,4 +1,11 @@
-<h1 class="mb-1 restaurant-show-title">{{this.name}}</h1>
+<h1 class="mb-1 restaurant-show-title">{{restaurants.name}}</h1>
+<div class="d-flex justify-content-center flex-wrap">
+  <a href="/">
+    <button type="button" class="btn btn-outline-secondary mx-2">
+      返回首頁
+    </button>
+  </a>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
@@ -8,7 +15,7 @@
           <i class="fas fa-utensils pr-2"></i>
           類別：
         </span>
-        {{this.category}}
+        {{restaurants.category}}
       </p>
 
       <p class="mb-1">
@@ -16,7 +23,7 @@
           <i class="fas fa-map-marker-alt pr-2"></i>
           地址：
         </span>
-        {{this.location}}
+        {{restaurants.location}}
         <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
           <i class="fas fa-location-arrow pr-2 fa-xs"></i>
         </a>
@@ -27,14 +34,14 @@
           <i class="fas fa-mobile-alt pr-2"></i>
           電話：
         </span>
-        {{this.phone}}
+        {{restaurants.phone}}
       </p>
 
       <p class="mb-5">
-        {{this.description}}
+        {{restaurants.description}}
       </p>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{this.image}}" alt="{{this.name}}"
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurants.image}}" alt="{{restaurants.name}}"
         style="max-width: 600px;">
     </div>
   </div>

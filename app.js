@@ -42,9 +42,12 @@ app.post('/restaurant/create', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.get('/restaurant/:id', (req, res) => {
-  const restaurant = restaurantList.find((item) => item.id === Number(req.params.id))
-  res.render('show', restaurant)
+app.get('/restaurant/:id/detail', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurants) => res.render('show', { restaurants }))
+    .catch(error => console.log(error))
 })
 
 app.get('/search', (req, res) => {
