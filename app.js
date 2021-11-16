@@ -1,8 +1,22 @@
 const express = require('express')
-const app = express()
-const port = 3000
 const exphbs = require('express-handlebars')
 const restaurantList = require('./restaurant.json').results
+const mongoose = require('mongoose')
+const db = mongoose.connection
+
+const app = express()
+const port = 3000
+
+
+mongoose.connect('mongodb://localhost/restaurant')
+
+db.on('error', () => {
+  console.log('mongodb error')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -26,5 +40,5 @@ app.get('/search', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Running on the localhost:${port}`)
+  console.log(`Running on the http://localhost:${port}`)
 })
