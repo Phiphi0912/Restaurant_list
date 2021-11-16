@@ -64,9 +64,15 @@ app.post('/restaurant/:id/edit', (req, res) => {
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-  const restaurants = restaurantList.filter((item) => item.name.toLowerCase().includes(keyword) || item.category.toLowerCase().includes(keyword))
-
-  res.render('index', { restaurantList: restaurants, keyword })
+  Restaurant.find({
+    $or: [  //這裡使用mongoose提供的or 運算子
+      { name: { $regex: keyword } }, //這裡使用mongoose提供的正規表達式來搜尋
+      { category: { $regex: keyword } }
+    ]
+  })
+    .lean()
+    .then((restaurants) => res.render('index', { restaurants, keyword }))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
