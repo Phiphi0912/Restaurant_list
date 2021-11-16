@@ -43,10 +43,22 @@ app.post('/restaurant/create', (req, res) => {
 })
 
 app.get('/restaurant/:id/detail', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
+  return Restaurant.findById(req.params.id)
     .lean()
     .then((restaurants) => res.render('show', { restaurants }))
+    .catch(error => console.log(error))
+})
+
+app.get('/restaurant/:id/edit', (req, res) => {
+  return Restaurant.findById(req.params.id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurant/:id/edit', (req, res) => {
+  return Restaurant.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.redirect(`/restaurant/${req.params.id}/detail`))
     .catch(error => console.log(error))
 })
 
