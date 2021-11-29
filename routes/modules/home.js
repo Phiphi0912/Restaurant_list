@@ -32,7 +32,7 @@ router.get('/search', (req, res) => {
   }
 
   Restaurant.find({
-    $or: [  //這裡使用mongoose提供的or 運算子
+    $or: [     //這裡使用MongoDB提供的or運算子：{ $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
       { name: { $regex: keyword, $options: 'i' } }, //這裡使用mongodb提供使用正則表達式$regex操作符來進行搜尋
       { category: { $regex: keyword, $options: 'i' } } //options則可以用來使用其他的表達是，i則代表不分大小寫
     ]
