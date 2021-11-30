@@ -16,6 +16,8 @@ router.get('/search', (req, res) => {
   const sortSelection = req.query.sort
   const sortMethod = {}
 
+  if (!keyword) return
+
   switch (sortSelection) {
     case 'asc':
       sortMethod.name_en = 'asc'
