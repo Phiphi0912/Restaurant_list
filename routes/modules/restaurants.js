@@ -8,12 +8,16 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
+  if (!req.body) return
+
   Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 router.get('/:id/detail', (req, res) => {
+  if (!req.params.id) return
+
   return Restaurant.findById(req.params.id)
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
@@ -21,6 +25,8 @@ router.get('/:id/detail', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
+  if (!req.params.id) return
+
   return Restaurant.findById(req.params.id)
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
@@ -28,6 +34,8 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+  if (!req.body) return
+  
   return Restaurant.findByIdAndUpdate(req.params.id, req.body)  //前面放篩選條件，後面放更新物件
     .then(() => res.redirect(`/restaurant/${req.params.id}/detail`))
     .catch(error => console.log(error))
