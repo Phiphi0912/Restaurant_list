@@ -11,12 +11,14 @@ router.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+router.get('/sort', (req, res) => {
+  
+})
+
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   const sortSelection = req.query.sort
   const sortMethod = {}
-
-  if (!keyword) return
 
   switch (sortSelection) {
     case 'asc':
