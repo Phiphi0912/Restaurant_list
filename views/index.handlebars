@@ -10,15 +10,23 @@
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
-          <select class="custom-select ml-2" name="sort" id="sort">
-            <option value="asc" {{compare 'asc' sortSelection}}>A-Z</option> <!-- 運用客制化的helpers來比對value與所選的sort是否相同 -->
-            <option value="desc" {{compare 'desc' sortSelection}}>Z-A</option>
-            <option value="category" {{compare 'category' sortSelection}}>類別</option>
-            <option value="location" {{compare 'location' sortSelection}}>地區</option>
-          </select>
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <form action="/sort" class="col-9 col-lg-10 row align-items-center justify-content-end">
+      <select class="ml-2 mr-2" name="sort" id="sort">
+        <option value="asc" {{compare 'asc' sortSelection}}>A-Z</option> <!-- 運用客制化的helpers來比對value與所選的sort是否相同 -->
+        <option value="desc" {{compare 'desc' sortSelection}}>Z-A</option>
+        <option value="category" {{compare 'category' sortSelection}}>類別</option>
+        <option value="location" {{compare 'location' sortSelection}}>地區</option>
+      </select>
+      <button class="btn btn-major" type="submit" id="search-button">排序</button>
+    </form>
   </div>
 </div>
 
