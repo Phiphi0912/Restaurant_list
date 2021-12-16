@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const session = require('express-session')
 const PORT = process.env.PORT || 3000
 
 const methodOverride = require('method-override')
@@ -19,6 +20,12 @@ app.engine('handlebars', exphbs({
 }))
 
 app.set('view engine', 'handlebars')
+
+app.use(session({
+  secret: 'ThisIsSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
