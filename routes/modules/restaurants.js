@@ -8,43 +8,58 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-  if (!req.body) return
+  const userId = req.user._id
+  const body = req.body
 
-  Restaurant.create(req.body)
+  if (!body) return
+
+  Restaurant.create({ ...body, userId }) //這裡加上...是因為req.body本身就是物件
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 router.get('/:id/detail', (req, res) => {
-  if (!req.params.id) return
+  const userId = req.user._id
+  const _id = req.params.id
 
-  return Restaurant.findById(req.params.id)
+  if (!_id) return
+
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
 
 router.get('/:id/edit', (req, res) => {
-  if (!req.params.id) return
+  const userId = req.user._id
+  const _id = req.params.id
 
-  return Restaurant.findById(req.params.id)
+  if (!_id) return
+
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 
 router.put('/:id', (req, res) => {
-  if (!req.body) return
-  
-  return Restaurant.findByIdAndUpdate(req.params.id, req.body)  //前面放篩選條件，後面放更新物件
+  const userId = req.user._id
+  const _id = req.params.id
+  const body = req.body
+  if (!body) return
+
+  return Restaurant.findOneAndUpdate({ _id, userId }, { body })  //為什麼是set
     .then(() => res.redirect(`/restaurant/${req.params.id}/detail`))
     .catch(error => console.log(error))
 })
 
 router.delete('/:id', (req, res) => {
-  if (!req.params.id) return
+  const userId = req.user._id
+  const _id = req.params.id
 
-  return Restaurant.findById(req.params.id)
+  if (!_id) return
+
+  return Restaurant.findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
