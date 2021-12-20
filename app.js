@@ -1,7 +1,12 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
-const PORT = process.env.PORT || 3000
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+const PORT = process.env.PORT
 
 const methodOverride = require('method-override')
 const routes = require('./routes/index')
@@ -24,7 +29,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars')
 
 app.use(session({
-  secret: 'ThisIsSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
