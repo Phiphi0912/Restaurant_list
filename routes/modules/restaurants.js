@@ -48,7 +48,7 @@ router.put('/:id', (req, res) => {
   const body = req.body
   if (!body) return
 
-  return Restaurant.findOneAndUpdate({ _id, userId }, { body })  //為什麼是set
+  return Restaurant.findOneAndUpdate({ _id, userId }, { $set: body }) 
     .then(() => res.redirect(`/restaurant/${req.params.id}/detail`))
     .catch(error => console.log(error))
 })
