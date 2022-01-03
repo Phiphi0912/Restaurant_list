@@ -2,12 +2,14 @@
 使用 Node.js 與 Express 所建立之餐廳清單，用戶能夠針對餐廳資料進行查詢以及排序，甚至能對其進行新增、讀取、更新以及刪除的動作，將其打造成屬於自己的美食餐廳清單
 
 ## 畫面呈現
+### 登入頁面
+![Homepage](/public/image/A1-login-image.PNG)
 ### 首頁
 ![Homepage](/public/image/A1-index-image.PNG)
-### 詳細頁面
-![Homepage](/public/image/A1-show-image.PNG)
 
 ## 功能
+- 使用者需要註冊帳號才能使用
+- 使用者可以選擇信箱註冊或是FB註冊
 - 使用者能新增餐廳至清單當中
 - 使用者能夠讀取餐廳詳細資料
 - 使用者能夠更新現有的餐廳資料
