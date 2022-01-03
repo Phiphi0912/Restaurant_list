@@ -27,7 +27,7 @@ const seed_users = [
 db.once('open', () => {
   Promise.all(
     Array.from(seed_users, user => {
-      return bcrypt  //為什麼這裡需要加上return
+      return bcrypt
         .genSalt(12)
         .then(salt => bcrypt.hash(user.password, salt))
         .then(hash => User.create({
@@ -41,7 +41,6 @@ db.once('open', () => {
           user.userIndex.forEach(index => {
             restaurantList[index].userId = userId
             userRestaurant.push(restaurantList[index])
-            console.log(userRestaurant)
           })
           return Restaurant.create(userRestaurant)
         })
