@@ -39,7 +39,7 @@ router.post('/register', (req, res) => {
     .then(user => {
       if (user) {
         errors.push({ message: '此信箱已經註冊過！' })
-        res.render('register', { errors, name, email, password, confirmPassword })
+        return res.render('register', { errors, name, email, password, confirmPassword })
       }
 
       return bcrypt
@@ -50,9 +50,9 @@ router.post('/register', (req, res) => {
           email,
           password: hash
         }))
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
     })
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
 })
 
 router.get('/logout', (req, res) => {
