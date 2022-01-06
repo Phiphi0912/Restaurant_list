@@ -26,7 +26,11 @@ router.get('/:id/detail', (req, res) => {
 
   return Restaurant.findOne({ _id, userId })
     .lean()
-    .then((restaurant) => res.render('show', { restaurant }))
+    .then((restaurant) => {
+      if (!restaurant) return
+
+      res.render('show', { restaurant })
+    })
     .catch(err => errorHandler(err, res))
 })
 
@@ -38,7 +42,11 @@ router.get('/:id/edit', (req, res) => {
 
   return Restaurant.findOne({ _id, userId })
     .lean()
-    .then((restaurant) => res.render('edit', { restaurant }))
+    .then((restaurant) => {
+      if (!restaurant) return
+
+      res.render('edit', { restaurant })
+    })
     .catch(err => errorHandler(err, res))
 })
 
@@ -60,7 +68,11 @@ router.delete('/:id', (req, res) => {
   if (!_id) return
 
   return Restaurant.findOne({ _id, userId })
-    .then(restaurant => restaurant.remove())
+    .then(restaurant => {
+      if (!restaurant) return
+
+      restaurant.remove()
+    })
     .then(() => res.redirect('/'))
     .catch(err => errorHandler(err, res))
 })
