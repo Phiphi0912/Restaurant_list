@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router()
-
+const { errorHandler } = require('../../middleware/errorHandler')
 const Restaurant = require('../../models/restaurant')
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   const userId = req.user._id
   Restaurant.find({ userId })
     .lean()
     .sort({ _id: 'asc' })
     .then((restaurants) => res.render('index', { restaurants }))
-    .catch(error => console.log(error))
+    .catch(err => errorHandler(err, res))
 })
 
 router.get('/search', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/search', (req, res) => {
   })
     .lean()
     .then((restaurants) => res.render('index', { restaurants, keyword }))
-    .catch(error => console.log(error))
+    .catch(err => errorHandler(err, res))
 })
 
 router.get('/sort', (req, res) => {
@@ -51,7 +51,7 @@ router.get('/sort', (req, res) => {
     .lean()
     .sort(sortMethod)
     .then((restaurants) => res.render('index', { restaurants, sortSelection }))
-    .catch(error => console.log(error))
+    .catch(err => errorHandler(err, res))
 })
 
 module.exports = router
