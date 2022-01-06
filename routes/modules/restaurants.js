@@ -27,7 +27,7 @@ router.get('/:id/detail', (req, res) => {
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => {
-      if (!restaurant) return
+      if (!restaurant) return errorHandler(err, res)
 
       res.render('show', { restaurant })
     })
@@ -43,7 +43,7 @@ router.get('/:id/edit', (req, res) => {
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => {
-      if (!restaurant) return
+      if (!restaurant) return errorHandler(err, res)
 
       res.render('edit', { restaurant })
     })
@@ -69,7 +69,7 @@ router.delete('/:id', (req, res) => {
 
   return Restaurant.findOne({ _id, userId })
     .then(restaurant => {
-      if (!restaurant) return
+      if (!restaurant) return errorHandler(err, res)
 
       restaurant.remove()
     })
