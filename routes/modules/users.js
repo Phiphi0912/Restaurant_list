@@ -52,8 +52,8 @@ router.post('/register', (req, res) => {
           password: hash
         }))
         .then(() => res.redirect('/'))
-        .catch(err => errorHandler(err, res))
     })
+    .catch(err => errorHandler(err, res))
 })
 
 router.get('/logout', (req, res) => {
