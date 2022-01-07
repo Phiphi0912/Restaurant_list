@@ -4,6 +4,8 @@ const { errorHandler } = require('../../middleware/errorHandler')
 const Restaurant = require('../../models/restaurant')
 
 router.get('/', (req, res, next) => {
+  // Promise.reject(new Error('fake error'))
+  //   .catch(next)
   const userId = req.user._id
   Restaurant.find({ userId })
     .lean()

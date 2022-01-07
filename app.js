@@ -50,6 +50,13 @@ app.use((req, res, next) => {
   next()
 })
 
+// app.use((err, req, res, next) => {
+//   console.error(err)
+//   const statusCode = err.statusCode || 500
+//   res.render('error', { statusCode, message: '伺服器出了點問題，請稍候在試' })
+//   next()
+// })
+
 app.use(routes)
 
 
